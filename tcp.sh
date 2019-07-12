@@ -160,7 +160,8 @@ start_menu(){
 echo && 
 echo -e " v2ray install controller ${Red_font_prefix}[v${sh_ver}]${Font_color_suffix}
   -- by leejungwoo@me.com --
-  
+ 
+ ${Green_font_prefix}0.${Font_color_suffix} version check and update
  ${Green_font_prefix}1.${Font_color_suffix} V2ray prepare
  ${Green_font_prefix}2.${Font_color_suffix} V2ray timesync
  ${Green_font_prefix}3.${Font_color_suffix} V2ray install
@@ -184,6 +185,9 @@ echo
 echo
 read -p " please input number [0-11]:" num
 case "$num" in
+	0)
+	v2ray-prepare
+	;;
 	1)
 	v2ray-prepare
 	;;
@@ -233,7 +237,6 @@ check_sys(){
     fi
 }
 
-#检查Linux版本
 check_version(){
 	if [[ -s /etc/redhat-release ]]; then
 		version=`grep -oE  "[0-9.]+" /etc/redhat-release | cut -d . -f 1`
@@ -313,7 +316,7 @@ check_status(){
 	fi
 }
 
-#############系统检测组件#############
+
 check_sys
 check_version
 [[ ${release} != "debian" ]] && [[ ${release} != "ubuntu" ]] && [[ ${release} != "centos" ]] && echo -e "${Error} This script does not support the current system! ${release} !" && exit 1
