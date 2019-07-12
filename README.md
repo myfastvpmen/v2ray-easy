@@ -1,5 +1,5 @@
-# v2ray-esay
-v2ray-esayinstall
+# v2ray-easy
+v2ray-easyinstall
 
 
 comimng soon 
