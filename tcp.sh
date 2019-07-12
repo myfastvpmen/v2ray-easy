@@ -118,14 +118,14 @@ net.ipv4.ip_forward = 1
 ">>/etc/sysctl.conf
 	sysctl -p
     echo "
-    ${Info}suscess add /etc/sysctl.conf script!!
+    suscess add /etc/sysctl.conf script!!
     "
 	echo "* soft nofile 1000000
 * hard nofile 1000000">>/etc/security/limits.conf
 	echo "ulimit -SHn 1000000">>/etc/profile
     ulimit -SHn 1000000
     echo "
-    ${Info}suscess add security/limits.conf !!
+    suscess add security/limits.conf !!
     "
     read -p "Need to reboot server ? [Y/n] :" yn
 	[ -z "${yn}" ] && yn="y"
