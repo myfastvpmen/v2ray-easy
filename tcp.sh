@@ -5,11 +5,11 @@ export PATH
 #=================================================
 #	System Required: Debian 8/9,Ubuntu 16+
 #	Description: V2ray + Optimaize
-#	Version: 1.4.8
+#	Version: 1.4.9
 #	Author: LEEJUNGWOO@ME.com
 #=================================================
 
-sh_ver="1.4.8"
+sh_ver="1.4.9"
 github="raw.githubusercontent.com/myfastvpmen/v2ray-easy/master"
 
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
@@ -20,6 +20,8 @@ Tip="${Green_font_prefix}[tip]${Font_color_suffix}"
 
 #add BBR code
 startbbr(){
+	sed -i '/net.core.default_qdisc/d' /etc/sysctl.conf
+    sed -i '/net.ipv4.tcp_congestion_control/d' /etc/sysctl.conf
 	echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
 	echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
 	sysctl -p
@@ -65,33 +67,43 @@ v2ray-timesync(){
 optimizing_system(){
 	sed -i '/fs.file-max/d' /etc/sysctl.conf
 	sed -i '/fs.inotify.max_user_instances/d' /etc/sysctl.conf
+	sed -i '/net.core.rmem_max/d' /etc/sysctl.conf
+	sed -i '/net.core.wmem_max/d' /etc/sysctl.conf
+	sed -i '/net.core.netdev_max_backlog/d' /etc/sysctl.conf
+	sed -i '/net.core.somaxconn/d' /etc/sysctl.conf
 	sed -i '/net.ipv4.tcp_syncookies/d' /etc/sysctl.conf
 	sed -i '/net.ipv4.tcp_fin_timeout/d' /etc/sysctl.conf
 	sed -i '/net.ipv4.tcp_tw_reuse/d' /etc/sysctl.conf
-	sed -i '/net.ipv4.tcp_max_syn_backlog/d' /etc/sysctl.conf
+	sed -i '/net.ipv4.tcp_tw_recycle/d' /etc/sysctl.conf
 	sed -i '/net.ipv4.ip_local_port_range/d' /etc/sysctl.conf
+	sed -i '/net.ipv4.tcp_max_syn_backlog/d' /etc/sysctl.conf
 	sed -i '/net.ipv4.tcp_max_tw_buckets/d' /etc/sysctl.conf
+	sed -i '/net.ipv4.tcp_keepalive_time/d' /etc/sysctl.conf
 	sed -i '/net.ipv4.route.gc_timeout/d' /etc/sysctl.conf
-	sed -i '/net.ipv4.tcp_synack_retries/d' /etc/sysctl.conf
+	sed -i '/net.ipv4.tcp_fastopen/d' /etc/sysctl.conf
+	sed -i '/net.ipv4.tcp_mem/d' /etc/sysctl.conf
+	sed -i '/net.ipv4.tcp_rmem/d' /etc/sysctl.conf
+	sed -i '/net.ipv4.tcp_wmem/d' /etc/sysctl.conf
+	sed -i '/net.ipv4.tcp_mtu_probing/d' /etc/sysctl.conf
 	sed -i '/net.ipv4.tcp_syn_retries/d' /etc/sysctl.conf
+	sed -i '/net.ipv4.tcp_synack_retries/d' /etc/sysctl.conf
 	sed -i '/net.core.somaxconn/d' /etc/sysctl.conf
 	sed -i '/net.core.netdev_max_backlog/d' /etc/sysctl.conf
 	sed -i '/net.ipv4.tcp_timestamps/d' /etc/sysctl.conf
 	sed -i '/net.ipv4.tcp_max_orphans/d' /etc/sysctl.conf
 	sed -i '/net.ipv4.ip_forward/d' /etc/sysctl.conf
-	echo "start add script
-    
-            "
-    echo "
 
+	echo "
+			start add script
+         "
+    echo "
+#TCP Optimaze list added
 fs.file-max = 1000000
 fs.inotify.max_user_instances = 8192
-
 net.core.rmem_max = 67108864
 net.core.wmem_max = 67108864
 net.core.netdev_max_backlog = 250000
 net.core.somaxconn = 4096
-
 net.ipv4.tcp_syncookies = 1
 net.ipv4.tcp_fin_timeout = 30
 net.ipv4.tcp_tw_reuse = 1
@@ -112,8 +124,8 @@ net.core.somaxconn = 32768
 net.core.netdev_max_backlog = 32768
 net.ipv4.tcp_timestamps = 0
 net.ipv4.tcp_max_orphans = 32768
-# forward ipv4
 net.ipv4.ip_forward = 1
+#add-end
 
 ">>/etc/sysctl.conf
 	sysctl -p
