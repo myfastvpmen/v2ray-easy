@@ -5,11 +5,11 @@ export PATH
 #=================================================
 #	System Required: Debian 8/9,Ubuntu 16+
 #	Description: V2ray + Optimaize
-#	Version: 1.4.7
+#	Version: 1.4.8
 #	Author: LEEJUNGWOO@ME.com
 #=================================================
 
-sh_ver="1.4.7"
+sh_ver="1.4.8"
 github="raw.githubusercontent.com/myfastvpmen/v2ray-easy/master"
 
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
@@ -181,8 +181,7 @@ echo
 		echo -e " 
         This System OS : ${release} | version : ${version} | ${bit} | ${Green_font_prefix}Kernel : ${kernel_version}${Font_color_suffix} | 
 		BBR is implemented in kernel version 4.9 or higher.
-		--ref 
-        Current state: ${Green_font_prefix}Okay to run ${Font_color_suffix} ${Green_font_prefix}${kernel_status}${Font_color_suffix} |
+		Current state: ${Green_font_prefix}Okay to run ${Font_color_suffix} ${Green_font_prefix}${kernel_status}${Font_color_suffix} |
         Acc. kernel state : ${Green_font_prefix}${run_status}${Font_color_suffix}
         "
 		
