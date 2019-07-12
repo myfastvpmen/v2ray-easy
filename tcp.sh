@@ -5,11 +5,11 @@ export PATH
 #=================================================
 #	System Required: Debian 8/9,Ubuntu 16+
 #	Description: V2ray + Optimaize
-#	Version: 1.4.3
+#	Version: 1.4.5
 #	Author: LEECHEE
 #=================================================
 
-sh_ver="1.4.3"
+sh_ver="1.4.5"
 github="raw.githubusercontent.com/myfastvpmen/v2ray-easy/master"
 
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
@@ -176,8 +176,10 @@ echo
 		echo -e " Current state: ${Green_font_prefix}Not install${Font_color_suffix} Acc. kernel ${Red_font_prefix} Please install kernel first${Font_color_suffix}"
 	else
 		echo -e " 
-        This System OS : ${release} | version : ${version} | ${bit} | Kernel : ${kernel_version} | 
-        Current state: ${Green_font_prefix}istalled${Font_color_suffix} ${_font_prefix}${kernel_status}${Font_color_suffix} |
+        This System OS : ${release} | version : ${version} | ${bit} | ${Green_font_prefix}Kernel : ${kernel_version}${Font_color_suffix} | 
+		BBR is implemented in kernel version 4.9 or higher.
+		--ref 
+        Current state: ${Green_font_prefix}istalled${Font_color_suffix} ${Green_font_prefix}${kernel_status}${Font_color_suffix} |
         Acc. kernel state : ${Green_font_prefix}${run_status}${Font_color_suffix}
         "
 		
@@ -256,7 +258,7 @@ check_status(){
 	kernel_version_full=`uname -r`
 	if [[ ${kernel_version_full} = "4.14.129-bbrplus" ]]; then
 		kernel_status="BBRplus"
-	elif [[ ${kernel_version} = "3.10.0" || ${kernel_version} = "3.16.0" || ${kernel_version} = "3.2.0" || ${kernel_version} = "4.4.0" || ${kernel_version} = "3.13.0"  || ${kernel_version} = "2.6.32" || ${kernel_version} = "4.9.0" ]]; then
+	elif [[ ${kernel_version} = "3.10.0" || ${kernel_version} = "3.16.0" || ${kernel_version} = "3.2.0" || ${kernel_version} = "4.4.0" || ${kernel_version} = "3.13.0"  || ${kernel_version} = "2.6.32" ]]; then
 		kernel_status="Lotserver"
 	elif [[ `echo ${kernel_version} | awk -F'.' '{print $1}'` == "4" ]] && [[ `echo ${kernel_version} | awk -F'.' '{print $2}'` -ge 9 ]] || [[ `echo ${kernel_version} | awk -F'.' '{print $1}'` == "5" ]]; then
 		kernel_status="BBR"
@@ -268,9 +270,9 @@ check_status(){
 		if [[ -e /appex/bin/lotServer.sh ]]; then
 			run_status=`bash /appex/bin/lotServer.sh status | grep "LotServer" | awk  '{print $3}'`
 			if [[ ${run_status} = "running!" ]]; then
-				run_status="启动成功 running now "
+				run_status="running now "
 			else 
-				run_status="启动失败 not ruuning"
+				run_status="not ruuning"
 			fi
 		else 
 			run_status="acceleration module not installed-ls"
