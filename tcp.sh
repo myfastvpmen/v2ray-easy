@@ -5,11 +5,11 @@ export PATH
 #=================================================
 #	System Required: Debian 8/9,Ubuntu 16+
 #	Description: V2ray + Optimaize
-#	Version: 1.4.2
+#	Version: 1.4.3
 #	Author: LEECHEE
 #=================================================
 
-sh_ver="1.4.2"
+sh_ver="1.4.3"
 github="raw.githubusercontent.com/myfastvpmen/v2ray-easy/master"
 
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
@@ -52,10 +52,10 @@ v2ray-prepare(){
 
 #prepare for install
 v2ray-timesync(){
-    ntpdate time.bora.net
+    ntpdate pool.ntp.org
     /etc/init.d/ntp status
     /etc/init.d/ntp stop
-    ntpdate time.bora.net
+    ntpdate pool.ntp.org
     start_menu
     echo -e "${Info}Timesync compalte！"
 }
