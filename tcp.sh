@@ -5,11 +5,11 @@ export PATH
 #=================================================
 #	System Required: Debian 8/9,Ubuntu 16+
 #	Description: V2ray + Optimaize
-#	Version: 1.4.6
-#	Author: LEECHEE
+#	Version: 1.4.7
+#	Author: LEEJUNGWOO@ME.com
 #=================================================
 
-sh_ver="1.4.6"
+sh_ver="1.4.7"
 github="raw.githubusercontent.com/myfastvpmen/v2ray-easy/master"
 
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
@@ -61,7 +61,7 @@ v2ray-timesync(){
 }
 
 
-#优化系统配置
+
 optimizing_system(){
 	sed -i '/fs.file-max/d' /etc/sysctl.conf
 	sed -i '/fs.inotify.max_user_instances/d' /etc/sysctl.conf
@@ -134,7 +134,8 @@ net.ipv4.ip_forward = 1
 		reboot
 	fi
 }
-#更新脚本
+
+
 Update_Shell(){
 	echo -e "current version is [ ${sh_ver} ]，..."
 	sh_new_ver=$(wget --no-check-certificate -qO- "http://${github}/tcp.sh"|grep 'sh_ver="'|awk -F "=" '{print $NF}'|sed 's/\"//g'|head -1)
@@ -157,7 +158,7 @@ Update_Shell(){
 	fi
 }
 
-#开始菜单
+
 start_menu(){
 echo && 
 echo -e " v2ray install controller ${Red_font_prefix}[v${sh_ver}]${Font_color_suffix}
@@ -181,7 +182,7 @@ echo
         This System OS : ${release} | version : ${version} | ${bit} | ${Green_font_prefix}Kernel : ${kernel_version}${Font_color_suffix} | 
 		BBR is implemented in kernel version 4.9 or higher.
 		--ref 
-        Current state: ${Green_font_prefix}istalled${Font_color_suffix} ${Green_font_prefix}${kernel_status}${Font_color_suffix} |
+        Current state: ${Green_font_prefix}Okay to run ${Font_color_suffix} ${Green_font_prefix}${kernel_status}${Font_color_suffix} |
         Acc. kernel state : ${Green_font_prefix}${run_status}${Font_color_suffix}
         "
 		
@@ -222,7 +223,7 @@ case "$num" in
 esac
 }
 
-#检查系统
+
 check_sys(){
 	if [[ -f /etc/redhat-release ]]; then
 		release="centos"
@@ -277,45 +278,45 @@ check_status(){
 				run_status="not ruuning"
 			fi
 		else 
-			run_status="acceleration module not installed-ls"
+			run_status="acceleration module not installed - Lotserver"
 		fi
 	elif [[ ${kernel_status} == "BBR" ]]; then
 		run_status=`grep "net.ipv4.tcp_congestion_control" /etc/sysctl.conf | awk -F "=" '{print $2}'`
 		if [[ ${run_status} == "bbr" ]]; then
 			run_status=`lsmod | grep "bbr" | awk '{print $1}'`
 			if [[ ${run_status} == "tcp_bbr" ]]; then
-				run_status="BBR启动成功"
+				run_status="BBR is running"
 			else 
-				run_status="BBR启动失败"
+				run_status="BBR is not running"
 			fi
 		elif [[ ${run_status} == "tsunami" ]]; then
 			run_status=`lsmod | grep "tsunami" | awk '{print $1}'`
 			if [[ ${run_status} == "tcp_tsunami" ]]; then
-				run_status="BBR魔改版启动成功"
+				run_status="BBR-tsunami is running"
 			else 
-				run_status="BBR魔改版启动失败"
+				run_status="BBR-tsunami is not running"
 			fi
 		elif [[ ${run_status} == "nanqinlang" ]]; then
 			run_status=`lsmod | grep "nanqinlang" | awk '{print $1}'`
 			if [[ ${run_status} == "tcp_nanqinlang" ]]; then
-				run_status="暴力BBR魔改版启动成功"
+				run_status="BBR-nanqinlang is running"
 			else 
-				run_status="暴力BBR魔改版启动失败"
+				run_status="BBR-nanqinlang is not running"
 			fi
 		else 
-			run_status="未安装加速模块No acceleration module installed-bbr"
+			run_status="acceleration module not installed - BBR"
 		fi
 	elif [[ ${kernel_status} == "BBRplus" ]]; then
 		run_status=`grep "net.ipv4.tcp_congestion_control" /etc/sysctl.conf | awk -F "=" '{print $2}'`
 		if [[ ${run_status} == "bbrplus" ]]; then
 			run_status=`lsmod | grep "bbrplus" | awk '{print $1}'`
 			if [[ ${run_status} == "tcp_bbrplus" ]]; then
-				run_status="BBRplus启动成功"
+				run_status="BBRplus is running"
 			else 
-				run_status="BBRplus启动失败"
+				run_status="BBRplus is not runnging"
 			fi
 		else 
-			run_status="未安装加速模块No acceleration module installed-bbr+"
+			run_status="acceleration module not installed - BBR+"
 		fi
 	fi
 }
