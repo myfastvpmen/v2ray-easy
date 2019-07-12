@@ -5,11 +5,11 @@ export PATH
 #=================================================
 #	System Required: Debian 8/9,Ubuntu 16+
 #	Description: V2ray + Optimaize
-#	Version: 1.4.5
+#	Version: 1.4.6
 #	Author: LEECHEE
 #=================================================
 
-sh_ver="1.4.5"
+sh_ver="1.4.6"
 github="raw.githubusercontent.com/myfastvpmen/v2ray-easy/master"
 
 Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_prefix="\033[42;37m" && Red_background_prefix="\033[41;37m" && Font_color_suffix="\033[0m"
@@ -146,12 +146,14 @@ Update_Shell(){
 		if [[ ${yn} == [Yy] ]]; then
 			wget -N --no-check-certificate http://${github}/tcp.sh && chmod +x tcp.sh
 			echo -e "this version is[ ${sh_new_ver} ] !"
+			tcp.sh
 		else
 			echo && echo "	cancle..." && echo
 		fi
 	else
 		echo -e "it is latest version [ ${sh_new_ver} ] !"
-		sleep 5s
+		sleep 2s
+		start_menu
 	fi
 }
 
