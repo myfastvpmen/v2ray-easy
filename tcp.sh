@@ -186,7 +186,7 @@ echo
 read -p " please input number [0-11]:" num
 case "$num" in
 	0)
-	v2ray-prepare
+	Update_Shell
 	;;
 	1)
 	v2ray-prepare
